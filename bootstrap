@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+virtualenv env --prompt=asi
+ln -sfn ${root}/env/bin/activate ${root}/activate
+source ${root}/activate
+pip install -r ${root}/requirements.txt
