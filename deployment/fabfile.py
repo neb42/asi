@@ -31,7 +31,7 @@ def initialise_server():
 def deploy():
     checkout_dir = checkout_revision()
     bootstrap(checkout_dir)
-    switch()
+    switch(checkout_dir)
     restart()
 
 
