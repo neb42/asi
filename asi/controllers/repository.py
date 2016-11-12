@@ -1,35 +1,27 @@
-import urllib
-import requests
-
+from asi.models import RepoModel
 from asi.exceptions import UserNotFoundException
 
 
 class RepoController(object):
-    base_url = 'https://api.github.com'
-
     @classmethod
     def get_public_user_repos(cls, username, limit=None, orderby=None):
-        url = '{}/users/{}/repos'.format(cls.base_url, urllib.quote(username))
-        headers = {
-            "Accept": "application/vnd.github.v3+json"
-        }
-        response = requests.get(url, headers=headers)
+        # Get repos from model
+        repos = RepoModel.get_user_repos(username)
 
-        if response.status_code == requests.codes.NOT_FOUND:
-            raise UserNotFoundException()
+        # Return if no processing needs to be done
+        if len(repos) == 0:
+            return repos
 
-        result = response.json()
-
-        if len(result) == 0:
-            return result
-
-        result = [k for k in result if not k['private']]
+        # As github explicitly states whether a repo is private (not whether it is public)
+        # I am assuming it is public if private is not present
+        repos = [k for k in repos if not k.get('private', False)]
         if orderby:
             #TODO: proper sorting algorithm
-            result = sorted(result, key=lambda k: k[orderby], reverse=True)
+            repos = sorted(repos, key=lambda k: k[orderby], reverse=True)
         if limit:
-            result = result[:limit]
+            repos = repos[:limit]
 
-        result = [{'name': k['name'], 'html_url': k['html_url'], 'size': k['size']} for k in result]
+        # Select relevant fields
+        repos = [{'name': k.get('name'), 'html_url': k.get('html_url'), 'size': k.get('size')} for k in repos]
 
-        return result
+        return repos

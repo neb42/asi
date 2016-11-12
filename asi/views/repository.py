@@ -8,7 +8,7 @@ from asi.exceptions import UserNotFoundException
 
 class RepoListView(Resource):
     def get(self):
-        limit = request.args.get('limit')
+        limit = int(request.args.get('limit'))
         orderby = request.args.get('orderby', 'size')
         username = request.args.get('username')
 
