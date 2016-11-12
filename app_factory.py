@@ -12,7 +12,7 @@ ENVIRONMENT_MAP = {
 
 
 URL_MAP = {
-    '/repo/': RepoListView,
+    '/user/<username>/repo/': RepoListView,
 }
 
 
