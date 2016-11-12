@@ -2,26 +2,21 @@ import time
 from fabric.api import cd, sudo, task, env
 
 
+env.sudo_user = 'asi'
 env.roledefs = {
     'dev': ['82.2.82.169'],
     'live': [],
 }
-
-
 
 root = '/data/asi'
 releases = root + '/releases'
 logs = root + '/logs'
 run = root + '/sudo'
 git_repo = 'git@github.com:neb42/asi.git'
-env.sudo_user = 'asi'
 
 
 @task
 def initialise_server():
-    #sudo('install git')
-    #sudo('install apache')
-    #sudo('install mod wsgi')
     sudo('mkdir -p {}'.format(releases))
     sudo('mkdir -p {}'.format(logs))
     sudo('mkdir -p {}'.format(run))
@@ -33,6 +28,14 @@ def deploy():
     bootstrap(checkout_dir)
     switch(checkout_dir)
     restart()
+
+
+@task
+def restart():
+    # Had some issues with restart on my raspberrypi
+    sudo('service apache2 stop', user='root')
+    time.sleep(3)
+    sudo('service apache2 start', user='root')
 
 
 def checkout_revision(revision='latest'):
@@ -58,10 +61,6 @@ def bootstrap(checkout_dir):
 def switch(checkout_dir):
     with cd(releases):
         sudo('ln -sfn {}/{} current'.format(releases, checkout_dir))
-
-
-def restart():
-    sudo('/etc/init.d/apache2 restart')
 
 
 def get_current_role():
