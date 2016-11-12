@@ -12,4 +12,5 @@ class ProductionConfig(BaseConfig):
 
 
 class TestingConfig(BaseConfig):
-    pass
+    DEBUG = True
+    TESTING = True
