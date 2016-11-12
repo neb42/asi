@@ -1,6 +1,3 @@
-import sys
-sys.path.insert(0, 'home/neb42/Workspace/asi')
-
 import unittest
 from mock import patch
 from asi.controllers import RepoController
@@ -154,7 +151,3 @@ class RepoControllerTestCase(unittest.TestCase):
         mock_get_request.return_value = github_response
         repos = RepoController.get_public_user_repos('auser', orderby='size')
         self.assertEqual(repos, expected_result)
-
-
-if __name__ == '__main__':
-    unittest.main()
