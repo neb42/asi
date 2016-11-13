@@ -2,10 +2,12 @@
 
 The service is being hosted on my raspberry pi so I apologise if it seems a bit slow. If it goes down for any reason drop me an email.
 
-The code was written using flask and flask-restful, and the requests library for communicating with github. 
+The code was written using flask and flask-restful, and the requests library for communicating with github. It is deployed with fabric and served with apache and wsgi.
+
+I've deployed the code with the dev config. This is because flask only pretty prints json results when debug is true and I thought that would be a bit easier for you to read.
 
 ## Usage
-http://bmcalindin-asi.ddns.net/user/&lt;username&gt;/repo/
+http://bmcalindin-asi.ddns.net/user/`<username`>/repo/
 
 ### Optional GET Parameters
 * limit - integer - the maximum number of repos to show
