@@ -4,8 +4,7 @@ from fabric.api import cd, sudo, task, env
 
 env.sudo_user = 'asi'
 env.roledefs = {
-    'dev': ['82.2.82.169'],
-    'live': [],
+    'live': ['bmcalindin-asi.ddns.net'],
 }
 
 root = '/data/asi'
@@ -61,10 +60,3 @@ def bootstrap(checkout_dir):
 def switch(checkout_dir):
     with cd(releases):
         sudo('ln -sfn {}/{} current'.format(releases, checkout_dir))
-
-
-def get_current_role():
-    roles = filter(lambda x: env.host_string in x[1], env.roledefs.items())
-    if len(roles) != 1:
-        raise Exception('Invalid number of roles')
-    return roles[0][0]
