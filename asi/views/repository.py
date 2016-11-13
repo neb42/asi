@@ -15,6 +15,9 @@ class RepoListView(Resource):
         except ValueError:
             return 'Bad Request: limit must be an integer.', codes.BAD_REQUEST
 
+        if limit < 1:
+            return 'Bad Request: you have requested to view no repositories.', codes.BAD_REQUEST
+
         try:
             repo_list = RepoController.get_public_user_repos(username, limit=limit, orderby=orderby)
         except UserNotFoundException:
