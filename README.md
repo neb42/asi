@@ -5,7 +5,7 @@ The service is being hosted on my raspberry pi so I apologise if it seems a bit 
 The code was written using flask and flask-restful, and the requests library for communicating with github. 
 
 ## Usage
-http://bmcalindin-asi.ddns.net/user/\<username\>/repo/
+http://bmcalindin-asi.ddns.net/user/&lt;username&gt;/repo/
 
 ### Optional GET Parameters
 * limit - integer - the maximum number of repos to show
