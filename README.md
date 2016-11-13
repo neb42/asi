@@ -7,7 +7,7 @@ The code was written using flask and flask-restful, and the requests library for
 I've deployed the code with the dev config. This is because flask only pretty prints json results when debug is true and I thought that would be a bit easier for you to read.
 
 ## Usage
-http://bmcalindin-asi.ddns.net/user/`<username`>/repo/
+http://bmcalindin-asi.ddns.net/user/username/repo/
 
 ### Optional GET Parameters
 * limit - integer - the maximum number of repos to show
