@@ -8,8 +8,12 @@ from asi.exceptions import UserNotFoundException
 
 class RepoListView(Resource):
     def get(self, username):
-        limit = int(request.args.get('limit', 5))
         orderby = request.args.get('orderby', 'size')
+        limit = request.args.get('limit', 5)
+        try:
+            limit = int(limit)
+        except ValueError:
+            return 'Bad Request: limit must be an integer.', codes.BAD_REQUEST
 
         try:
             repo_list = RepoController.get_public_user_repos(username, limit=limit, orderby=orderby)
