@@ -10,8 +10,8 @@ I've deployed the code with the dev config. This is because flask only pretty pr
 http://bmcalindin-asi.ddns.net/user/username/repo/
 
 ### Optional GET Parameters
-* limit - integer - the maximum number of repos to show
-* orderby - the field to sort the results by
+* limit - integer (default=5) - the maximum number of repos to show
+* orderby - string (default=size) - the field to sort the results by
 
 ## Deployment
 Fabric was used for the deployment
