@@ -14,14 +14,11 @@ class RepoController(object):
 
         # As github explicitly states whether a repo is private (not whether it is public)
         # I am assuming it is public if private is not present
-        repos = [k for k in repos if not k.get('private', False)]
+        repos = [{'name': k.get('name'), 'html_url': k.get('html_url'), 'size': k.get('size')} for k in repos if not k.get('private', False)]
+
         if orderby:
-            #TODO: proper sorting algorithm
             repos = sorted(repos, key=lambda k: k[orderby], reverse=True)
         if limit:
             repos = repos[:limit]
-
-        # Select relevant fields
-        repos = [{'name': k.get('name'), 'html_url': k.get('html_url'), 'size': k.get('size')} for k in repos]
 
         return repos
