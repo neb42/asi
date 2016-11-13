@@ -1,4 +1,4 @@
-# asi
+# ASI Coding Challenge
 
 The service is being hosted on my raspberry pi so I apologise if it seems a bit slow. If it goes down for any reason drop me an email.
 
